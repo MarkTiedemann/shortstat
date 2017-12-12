@@ -1,4 +1,4 @@
-import { Stats } from './stats'
+import { Stats } from './ifaces'
 
 const parse = (line: string) => (regExp: RegExp): number => {
   if (!line) return 0

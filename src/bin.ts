@@ -1,34 +1,29 @@
 #!/usr/bin/env node
 
-import { spawn } from 'child_process'
-import { createInterface } from 'readline'
+import * as path from 'path'
+import * as cp from 'child_process'
+import * as rl from 'readline'
 
 import * as minimist from 'minimist'
 import * as minimistOptions from 'minimist-options'
 
-import { Stats } from './stats'
+import { Stats } from './ifaces'
 import parse from './parse'
 import format from './format'
 
 const options = minimistOptions({
-  cwd: {
-    type: 'string',
-    default: process.cwd()
-  },
-  author: {
-    type: 'string'
-  },
-  branches: {
-    type: 'string'
-  }
+  author: { type: 'string' },
+  branch: { type: 'string' }
 })
 
-const { cwd, author, branch } = minimist(process.argv, options)
+const argv = process.argv.slice(2)
+const { _, author, branch } = minimist(argv, options)
 
 const authorArgs = author ? ['--author', author] : []
-const branchArgs = branch ? ['--branches', branch] : []
+const branchArgs = branch ? ['-b', branch] : []
+const cwd = _.length > 0 ? path.resolve(..._) : process.cwd()
 
-const git = spawn(
+const git = cp.spawn(
   'git',
   ['log', ...authorArgs, ...branchArgs, '--shortstat'],
   { cwd }
@@ -36,7 +31,7 @@ const git = spawn(
 
 git.stderr.pipe(process.stderr)
 
-const readline = createInterface(git.stdout)
+const readline = rl.createInterface(git.stdout)
 
 const totalStats: Stats = {
   filesChanged: 0,

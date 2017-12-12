@@ -1,7 +1,7 @@
 import * as humanizeNumber from 'humanize-number'
 import chalk from 'chalk'
 
-import { Stats } from './stats'
+import { Stats } from './ifaces'
 
 export default (stats: Stats): string => {
   const humanized = [
@@ -22,9 +22,9 @@ export default (stats: Stats): string => {
   const { green, red } = chalk
 
   const formatted = [
-    green(`+  ${insertions}  ::  insertions`),
-    red(`-  ${deletions}  ::  deletions`),
-    `~  ${filesChanged}  ::  files changed`
+    green(`+  ${insertions}  insertions`),
+    red(`-  ${deletions}  deletions`),
+    `~  ${filesChanged}  files changed`
   ].join('\n')
 
   return '\n' + formatted + '\n'

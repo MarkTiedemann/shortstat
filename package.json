@@ -3,10 +3,16 @@
   "description": "`git log --shortstat` summary.",
   "version": "0.0.0",
   "private": true,
+  "author": "Mark Tiedemann <www.marktiedemann@gmail.com>",
+  "license": "WTF",
+  "bin": {
+    "shortstat": "dist/bin.js"
+  },
   "scripts": {
     "fmt": "prettier --write \"**/*.{ts,json,md}\"",
-    "tsc": "tsc"
+    "build": "rimraf dist && tsc"
   },
+  "files": ["dist"],
   "dependencies": {
     "chalk": "^2.3.0",
     "humanize-number": "^0.0.2",
@@ -17,6 +23,24 @@
     "@types/minimist-options": "^3.0.0",
     "@types/node": "^8.0.58",
     "prettier": "^1.9.1",
+    "rimraf": "^2.6.2",
     "typescript": "^2.6.2"
-  }
+  },
+  "keywords": [
+    "git",
+    "log",
+    "stat",
+    "shortstat",
+    "summary",
+    "insertions",
+    "deletions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkTiedemann/shortstat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarkTiedemann/shortstat/issues"
+  },
+  "homepage": "https://github.com/MarkTiedemann/shortstat"
 }
