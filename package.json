@@ -1,0 +1,22 @@
+{
+  "name": "shortstat",
+  "description": "`git log --shortstat` summary.",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "fmt": "prettier --write \"**/*.{ts,json,md}\"",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "humanize-number": "^0.0.2",
+    "minimist": "^1.2.0",
+    "minimist-options": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/minimist-options": "^3.0.0",
+    "@types/node": "^8.0.58",
+    "prettier": "^1.9.1",
+    "typescript": "^2.6.2"
+  }
+}
