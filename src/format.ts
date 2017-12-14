@@ -19,13 +19,15 @@ export default (stats: Stats): string => {
 
   const [filesChanged, insertions, deletions] = padded
 
+  const pluralS = (n: number) => (n === 1 ? '' : 's')
+
   const { green, red } = chalk
 
-  const formatted = [
-    green(`+  ${insertions}  insertions`),
-    red(`-  ${deletions}  deletions`),
-    `~  ${filesChanged}  files changed`
-  ].join('\n')
+  const lines = [
+    green(`+  ${insertions}  insertion${pluralS(stats.insertions)}`),
+    red(`-  ${deletions}  deletion${pluralS(stats.deletions)}`),
+    `~  ${filesChanged}  file${pluralS(stats.filesChanged)} changed`
+  ]
 
-  return '\n' + formatted + '\n'
+  return '\n' + lines.join('\n') + '\n'
 }

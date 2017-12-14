@@ -23,27 +23,31 @@ const authorArgs = author ? ['--author', author] : []
 const branchArgs = branch ? ['-b', branch] : []
 const cwd = _.length > 0 ? path.resolve(..._) : process.cwd()
 
-const git = cp.spawn(
-  'git',
-  ['log', ...authorArgs, ...branchArgs, '--shortstat'],
-  { cwd }
-)
+const gitArgs = [
+  'log',
+  ...authorArgs,
+  ...branchArgs,
+  '--shortstat',
+  '--oneline'
+]
+
+const git = cp.spawn('git', gitArgs, { cwd })
 
 git.stderr.pipe(process.stderr)
 
 const readline = rl.createInterface(git.stdout)
 
 const totalStats: Stats = {
-  filesChanged: 0,
   insertions: 0,
-  deletions: 0
+  deletions: 0,
+  filesChanged: 0
 }
 
 readline.on('line', line => {
   const lineStats = parse(line)
-  totalStats.filesChanged += lineStats.filesChanged
   totalStats.insertions += lineStats.insertions
   totalStats.deletions += lineStats.deletions
+  totalStats.filesChanged += lineStats.filesChanged
 })
 
 git.on('close', code => {

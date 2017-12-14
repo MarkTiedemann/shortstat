@@ -25,8 +25,9 @@ npm install --global shortstat
 
 ## Development
 
-* **`yarn fmt`**: formats the code
-* **`yarn build`**: builds the code
+* **`yarn format`**: format the code
+* **`yarn build`**: build the code
+* **`yarn test`**: test the code
 
 ## License
 

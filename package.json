@@ -9,8 +9,13 @@
     "shortstat": "dist/bin.js"
   },
   "scripts": {
-    "fmt": "prettier --write \"**/*.{ts,json,md}\"",
-    "build": "rimraf dist && tsc"
+    "format": "prettier --write \"**/*.{ts,json,md}\"",
+    "prebuild": "yarn format",
+    "build": "rimraf dist && tsc",
+    "pretest": "yarn build",
+    "test": "node dist/parse_test && node dist/format_test",
+    "prepublishOnly":
+      "yarn test && rimraf dist/*_test.js && rimraf dist/ifaces.js"
   },
   "files": ["dist"],
   "dependencies": {
