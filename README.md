@@ -1,6 +1,6 @@
 # shortstat
 
-**`git log --shortstat` summary.**
+**`git log --shortstat`, but shorter.**
 
 ## Quickstart
 

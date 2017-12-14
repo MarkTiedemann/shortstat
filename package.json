@@ -1,6 +1,6 @@
 {
   "name": "shortstat",
-  "description": "`git log --shortstat` summary.",
+  "description": "`git log --shortstat`, but shorter.",
   "version": "0.0.0",
   "private": true,
   "author": "Mark Tiedemann <www.marktiedemann@gmail.com>",
