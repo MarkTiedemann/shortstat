@@ -14,7 +14,7 @@
     "pretest": "yarn build",
     "test": "node dist/parse_test && node dist/format_test",
     "prepublishOnly":
-      "yarn test && rimraf dist/*_test.js && rimraf dist/ifaces.js"
+      "yarn test && rimraf \"dist/{ifaces,test,*_test}.js\""
   },
   "files": ["dist"],
   "dependencies": {
