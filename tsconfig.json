@@ -6,15 +6,17 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2017",
+    "strict": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "strict": true,
-    "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "pretty": true,
+    "noEmitOnError": true,
+    "listEmittedFiles": true
   },
   "typeAcquisition": {
     "enable": true
