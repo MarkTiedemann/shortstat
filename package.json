@@ -1,7 +1,7 @@
 {
   "name": "shortstat",
   "description": "`git log --shortstat`, but shorter.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Mark Tiedemann <www.marktiedemann@gmail.com>",
   "license": "WTFPL",
   "bin": {
