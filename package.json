@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/minimist-options": "^3.0.0",
     "@types/node": "^8.0.58",
+    "concordance": "^3.0.0",
     "prettier": "^1.9.1",
     "rimraf": "^2.6.2",
     "typescript": "^2.6.2"

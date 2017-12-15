@@ -1,33 +1,32 @@
-import { deepStrictEqual, AssertionError } from 'assert'
+import * as path from 'path'
+import * as concordance from 'concordance'
 import chalk from 'chalk'
 
-const isAssertionError = (err: any): err is AssertionError =>
-  err && err.code === 'ERR_ASSERTION'
+export default (filename: string) => {
+  const file = path.relative(process.cwd(), filename)
+  const start = process.hrtime()
 
-const format = (message: string, ...stack: string[]) => {
-  const lines = [`AssertionError: ${message}`, ...stack]
-  return '\n' + lines.join('\n') + '\n'
-}
+  const ms = () => {
+    const diff = process.hrtime(start)
+    const ns = diff[0] * 1e9 + diff[1]
+    return ns * 1e-6
+  }
 
-const stringify = (x: any) => JSON.stringify(x, null, 4)
+  const formatMs = (ms: number) =>
+    chalk.yellow(`[${ms.toFixed(2)}ms]`)
 
-const formatAssertionErrorStack = (err: AssertionError) => [
-  chalk.red(`- ${stringify(err.expected)}`),
-  chalk.green(`+ ${stringify(err.actual)}`)
-]
+  const formatTitle = (prefix: string) =>
+    [prefix, chalk.cyan('»'), file, formatMs(ms())].join(' ')
 
-const formatErrorStack = (err: Error) => [
-  err.stack ? chalk.red(err.stack) : ''
-]
-
-export default <T>(message: string, actual: T, expected: T) => {
-  try {
-    deepStrictEqual(actual, expected)
-  } catch (err) {
-    process.exitCode = 1
-    const formatted = isAssertionError(err)
-      ? format(message, ...formatAssertionErrorStack(err))
-      : format(message, ...formatErrorStack(err))
-    console.error(formatted)
+  return <T>(message: string, actual: T, expected: T) => {
+    const comparison = concordance.compare(actual, expected)
+    if (!comparison.pass) {
+      process.exitCode = 1
+      const diff = concordance.diff(actual, expected)
+      const title = formatTitle(chalk.red(`✖ ${message}`))
+      console.error([title, diff].join('\n'))
+    } else {
+      console.log(formatTitle(chalk.green(`✔ ${message}`)))
+    }
   }
 }

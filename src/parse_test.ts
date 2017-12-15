@@ -1,8 +1,10 @@
 import test from './test'
 import parse from './parse'
 
-test(
-  'Should parse singular',
+const it = test(__filename)
+
+it(
+  'should parse singular',
   parse(' 1 file changed, 1 insertion(+), 1 deletion(-)'),
   {
     insertions: 1,
@@ -11,8 +13,8 @@ test(
   }
 )
 
-test(
-  'Should parse plural',
+it(
+  'should parse plural',
   parse(' 22 files changed, 22 insertions(+), 22 deletions(-)'),
   {
     insertions: 22,
@@ -21,12 +23,8 @@ test(
   }
 )
 
-test(
-  'Should ignore commit messages',
-  parse('60a200e 1 file changed'),
-  {
-    insertions: 0,
-    deletions: 0,
-    filesChanged: 0
-  }
-)
+it('should ignore commit messages', parse('60a200e 1 file changed'), {
+  insertions: 0,
+  deletions: 0,
+  filesChanged: 0
+})
